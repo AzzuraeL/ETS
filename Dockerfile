@@ -34,9 +34,16 @@ COPY --from=composer /app/vendor /app/vendor
 COPY package.json package-lock.json ./
 RUN npm ci --no-audit --no-fund
 
-# Copy project files needed for build (resources, vite config, artisan, etc.)
+# Copy project files needed for build (resources, vite config, artisan, bootstrap, app, config, routes)
+# Wayfinder and other Vite plugins may call `php artisan` during build which requires
+# the Laravel bootstrap files to exist (bootstrap/app.php etc.). Copy the minimal
+# application directories needed for artisan to bootstrap.
 COPY resources resources
 COPY vite.config.ts tsconfig.json artisan ./
+COPY bootstrap bootstrap
+COPY app app
+COPY config config
+COPY routes routes
 
 # Run the frontend build (Vite). Node 20+ required by Vite.
 RUN npm run build
