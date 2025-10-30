@@ -45,6 +45,12 @@ COPY app app
 COPY config config
 COPY routes routes
 
+# Copy example environment and generate an app key so artisan commands that
+# rely on environment values (and encryption) won't fail during the build.
+COPY .env.example .env
+# Generate APP_KEY (safe to ignore failures)
+RUN php artisan key:generate --ansi || true
+
 # Run the frontend build (Vite). Node 20+ required by Vite.
 RUN npm run build
 
