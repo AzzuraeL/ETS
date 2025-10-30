@@ -6,7 +6,7 @@ import type { BreadcrumbItem } from "@/types";
 import { Head, router } from "@inertiajs/react";
 import { Check, Edit, PlusCircle, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
-import { dashboard } from "../routes";
+import { dashboard } from "@/routes";
 
 const breadcrumbs: BreadcrumbItem[] = [
   { title: "Dashboard", href: dashboard().url },
