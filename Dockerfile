@@ -3,7 +3,11 @@
 FROM composer:2 AS composer
 WORKDIR /app
 COPY composer.json composer.lock ./
-RUN composer install --no-dev --prefer-dist --no-progress --no-suggest --optimize-autoloader
+# Don't run scripts in the composer stage because the application files (like
+# `artisan`) aren't copied yet. Run package discovery and other scripts later in
+# the final image or entrypoint where the full app is available.
+# Also remove the deprecated --no-suggest flag.
+RUN composer install --no-dev --prefer-dist --no-progress --no-scripts --optimize-autoloader
 
 # Stage 2: build frontend assets (needs PHP CLI for some Vite plugins)
 FROM node:20-bullseye AS node-builder

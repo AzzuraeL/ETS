@@ -13,6 +13,9 @@ if [ -z "${APP_KEY}" ]; then
   php artisan key:generate --ansi
 fi
 
+# Run package discovery now that vendor and app files exist in the final image
+php artisan package:discover --ansi || true
+
 # Run migrations in production mode (force)
 php artisan migrate --force || true
 
