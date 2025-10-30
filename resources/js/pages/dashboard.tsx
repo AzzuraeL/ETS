@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import AppLayout from "@/layouts/app-layout";
-import { dashboard } from "@/routes";
+import { dashboard } from "../routes";
 import type { BreadcrumbItem } from "@/types";
 import { Head, router } from "@inertiajs/react";
 import { Check, Edit, PlusCircle, Trash2 } from "lucide-react";
